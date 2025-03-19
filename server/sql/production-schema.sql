@@ -4,10 +4,12 @@ use eventsync;
 
 create table Users (
     user_id int primary key auto_increment,
-    username varchar(255) not null unique,
+    username varchar(255) null unique,
     image_url varchar(255) default "",
     `password` varchar(255) not null,
     email varchar(255) not null unique,
+    verification_code varchar(255) null,
+    is_verified boolean default null,
     created_at datetime default current_timestamp
 );
 
