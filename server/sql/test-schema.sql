@@ -4,10 +4,11 @@ use eventsync_test;
 
 create table Users (
     user_id int primary key auto_increment,
-    username varchar(255) not null unique,
+    username varchar(255) null unique,
     image_url varchar(255) default "",
     `password` varchar(255) not null,
     email varchar(255) not null unique,
+    is_verified boolean default null,
     created_at datetime default current_timestamp
 );
 
@@ -28,7 +29,7 @@ create table Invites (
     user_id int not null,
     isAccepted boolean default null,
     created_at datetime default current_timestamp,
-    foreign key (event_id) references Events(event_id) on delete cascade,
+    foreign key (event_id) references `Events`(event_id) on delete cascade,
     foreign key (user_id) references Users(user_id) on delete cascade,
     unique (event_id, user_id)
 );
@@ -42,7 +43,7 @@ create table Items (
     item_description text,
     item_quantity int default 1,
     created_at datetime default current_timestamp,
-    foreign key (event_id) references Events(event_id) on delete cascade,
+    foreign key (event_id) references `Events`(event_id) on delete cascade,
     foreign key (user_id) references Users(user_id) on delete cascade
 );
 
@@ -59,9 +60,9 @@ begin
     delete from Users;
     alter table Users auto_increment = 1;
 
-    insert into Users (username, image_url, `password`, email) values
-        ('user1', 'https://example.com/user1.jpg', 'password1', 'user1@mail.com'),
-        ('user2', 'https://example.com/user2.jpg', 'password2', 'user2@mail.com');
+    insert into Users (email, `password`) values
+        ('user1@mail.com', 'password1'),
+        ('user2@mail.com', 'password2');
 
     insert into `Events` (host_id, event_name, event_description, event_date, event_location) values
         (1, 'Event 1', 'Description for Event 1', '2023-12-01 10:00:00', 'Location 1'),

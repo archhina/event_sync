@@ -1,0 +1,48 @@
+### Register User / Duplicate email
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+  "email": "chhinaarmeet@gmail.com",
+  "password": "password"
+}
+
+### Register User / Duplicate email
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+  "email": "chhinaarmeet@gmail.com",
+  "password": "password"
+}
+
+### Email required
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+  "email": "",
+  "password": "password"
+}
+
+### Password required
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+  "email": "chhinaarmeet@gmail.com",
+  "password": ""
+}
+
+### Verify User
+
+GET http://localhost:8080/api/users/verify?code=0faf61ea-2281-4c7d-bfc2-00bde022b42c
+
+### Login User
+POST http://localhost:8080/api/users/login
+Content-Type: application/json
+
+{
+  "email": "chhinaarmeet@gmail.com",
+  "password": "password"
+}
