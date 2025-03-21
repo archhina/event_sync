@@ -1,3 +1,4 @@
+import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
 
@@ -61,12 +62,16 @@ const AccountModal = ({ open, setOpen, setLoggedInUser, setMessage, setMessageSt
       body: JSON.stringify(user)
     })
     .then(res => {
-      debugger
       if (res.ok) {
-        setLoggedInUser(user)
-        setMessage("Login successful!")
-        setMessageStyle("alert-success")
-        setOpen(false)
+        return res.json().then(fetchedUser => {
+          const user = jwtDecode(fetchedUser.jwt)
+          user.jwt = fetchedUser.jwt
+          setLoggedInUser(user)
+          localStorage.setItem("loggedInUser", JSON.stringify(user))
+          setMessage("Login successful!")
+          setMessageStyle("alert-success")
+          setOpen(false)
+        })
       } else {
         res.json().then(errs => {
           setMessage("Login failed: " + errs.join(", "))
