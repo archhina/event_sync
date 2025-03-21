@@ -1,3 +1,10 @@
+.sidebar-link {
+  font-size: 1rem;
+}
+
+.sidebar-link-active {
+  font-weight: bold;
+}
 
 
 /* #root {

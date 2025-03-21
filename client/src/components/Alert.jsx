@@ -1,7 +1,5 @@
 
 
-// import React from "react"
-
 const Alert = ({ message, setMessage, messageStyle, setMessageStyle }) => {
 
   return (

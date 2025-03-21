@@ -4,15 +4,15 @@ Content-Type: application/json
 
 {
   "email": "chhinaarmeet@gmail.com",
-  "password": "password"
+  "password": "Password1"
 }
 
-### Register User / Duplicate email
+### Not valid email
 POST http://localhost:8080/api/users/register
 Content-Type: application/json
 
 {
-  "email": "chhinaarmeet@gmail.com",
+  "email": "chhinaarmeet",
   "password": "password"
 }
 
@@ -36,7 +36,7 @@ Content-Type: application/json
 
 ### Verify User
 
-GET http://localhost:8080/api/users/verify?code=0faf61ea-2281-4c7d-bfc2-00bde022b42c
+GET http://localhost:8080/api/users/verify?code=0a79d436-2465-4a2c-95fe-c4157ee7de2e
 
 ### Login User
 POST http://localhost:8080/api/users/login
@@ -44,5 +44,29 @@ Content-Type: application/json
 
 {
   "email": "chhinaarmeet@gmail.com",
-  "password": "password"
+  "password": "Password1"
 }
+
+### Create Event
+
+POST http://localhost:8080/api/events/create
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0MjQ5MjcxOSwiZXhwIjoxNzQyNTc5MTE5fQ.DGra_rtL6mp7PMhafgGvOaAKAPwRQZdaVmLPD1VsdzE
+Content-Type: application/json
+
+{
+  "eventName": "Event 1",
+  "eventDate": "2025-04-01T18:00:00",
+  "eventLocation": "Dev10 Central",
+  "isPrivate": true,
+  "host": {
+    "userId": 1
+  }
+
+}
+
+### Get all public events
+GET http://localhost:8080/api/events/public
+
+### Get events by id
+GET http://localhost:8080/api/events/2
+

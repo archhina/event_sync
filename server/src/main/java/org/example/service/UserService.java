@@ -70,10 +70,6 @@ public class UserService {
         return result;
     }
 
-    public String loginUser(User user) {
-        return null;
-    }
-
     public Result<User> findByEmail(String email) {
         Result<User> result = new Result<>();
         User user = userRepository.findByEmail(email);
