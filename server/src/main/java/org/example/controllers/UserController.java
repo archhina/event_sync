@@ -55,13 +55,7 @@ public class UserController {
                 return new ResponseEntity<>("User is not verified", HttpStatus.UNAUTHORIZED);
             }
             if (passwordEncoder.matches(user.getPassword(), result.getPayload().getPassword())) {
-                String jwtString = Jwts.builder()
-                        .claim("userId", result.getPayload().getUserId())
-                        .claim("email", result.getPayload().getEmail())
-                        .setIssuedAt(new Date())
-                        .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1 day
-                        .signWith(secretSigningKey.getKey())
-                        .compact();
+                String jwtString = secretSigningKey.createJwt(result.getPayload().getUserId(), result.getPayload().getEmail());
                 Map<String, String> jwtMap = new HashMap<>();
                 jwtMap.put("jwt", jwtString);
 

@@ -18,8 +18,10 @@ create table `Events` (
     host_id int not null,
     event_name varchar(255) not null,
     event_description text,
+    event_image varchar(255) default "",
     event_date datetime not null,
     event_location varchar(255),
+    is_private boolean default false,
     created_at datetime default current_timestamp,
     foreign key (host_id) references Users(user_id) on delete cascade
 );

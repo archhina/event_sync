@@ -11,18 +11,14 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private Long userId;
 
-    @Column
     private String username;
 
-    @Column
     private String imageUrl;
 
-    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
     private boolean isVerified = false;
@@ -34,7 +30,7 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String username, String imageUrl, String email, String password, boolean isVerified, String verificationCode, LocalDateTime createdAt) {
+    public User(Long userId, String username, String imageUrl, String email, String password, boolean isVerified, String verificationCode, LocalDateTime createdAt) {
         this.userId = userId;
         this.username = username;
         this.imageUrl = imageUrl;
@@ -45,11 +41,11 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

@@ -19,12 +19,17 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/users/register", "/api/users/verify", "api/users/login").permitAll() // Public endpoints
-                    .anyRequest().authenticated() // Protect all other endpoints
+                    .requestMatchers(
+                            "/api/users/register",
+                            "/api/users/verify",
+                            "api/users/login",
+                            "api/events/public",
+                            "api/events/create",
+                            "api/events/{eventId}"
+                    ).permitAll() // Public endpoints
+                    .anyRequest().authenticated() // Require authentication for other endpoints
             )
-            .csrf(csrf -> csrf
-                    .ignoringRequestMatchers("/api/users/register", "/api/users/verify", "api/users/login") // Disable CSRF for these endpoints only
-            )
+            .csrf(csrf -> csrf.disable()) // Disable CSRF for All endpoints
             .httpBasic(httpBasic -> httpBasic.disable()) // Disable default Basic Auth
             .formLogin(formLogin -> formLogin.disable()); // Disable default login form
 
