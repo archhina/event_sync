@@ -10,7 +10,7 @@ const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setN
 
   return (
     <div>
-      <div className="navbar bg-base-100 shadow-md fixed top-0 left-64 w-[calc(100%-16rem)] z-50">
+      <div className="navbar bg-base-100 shadow-md fixed top-0 z-50 md:w-[calc(100%-16rem)]">
         <div className="navbar-start">
           <p className="text-xl font-semibold ml-4">{navMessage}</p>
         </div>
