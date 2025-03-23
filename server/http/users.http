@@ -36,7 +36,7 @@ Content-Type: application/json
 
 ### Verify User
 
-GET http://localhost:8080/api/users/verify?code=0a79d436-2465-4a2c-95fe-c4157ee7de2e
+GET http://localhost:8080/api/users/verify?code=c508ae9a-0927-4d77-8329-8f0292800912
 
 ### Login User
 POST http://localhost:8080/api/users/login
@@ -50,14 +50,14 @@ Content-Type: application/json
 ### Create Event
 
 POST http://localhost:8080/api/events/create
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0MjQ5MjcxOSwiZXhwIjoxNzQyNTc5MTE5fQ.DGra_rtL6mp7PMhafgGvOaAKAPwRQZdaVmLPD1VsdzE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0MjY3MTIxMSwiZXhwIjoxNzQyNzU3NjExfQ.b3kGIV0odaCUK4Ja2pWp00cYXzSbRmEdYT9SDwyFx7Q
 Content-Type: application/json
 
 {
   "eventName": "Event 1",
   "eventDate": "2025-04-01T18:00:00",
   "eventLocation": "Dev10 Central",
-  "isPrivate": true,
+  "isPrivate": false,
   "host": {
     "userId": 1
   }
@@ -70,3 +70,22 @@ GET http://localhost:8080/api/events/public
 ### Get events by id
 GET http://localhost:8080/api/events/2
 
+### Get items by event id
+GET http://localhost:8080/api/item/2
+
+### Create item
+POST http://localhost:8080/api/item
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0MjcwMTAyNCwiZXhwIjoxNzQyNzg3NDI0fQ.mqjwSTMAkkpNW5FWKlFJyEa_sOYtwtDm7cX135XFe68
+Content-Type: application/json
+
+{
+  "itemName": "Mac & Cheese",
+  "itemCategory": "Main Dish",
+  "event": {
+    "eventId": 2
+  }
+}
+
+### delete item
+DELETE http://localhost:8080/api/item/4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0MjY5NzQzNSwiZXhwIjoxNzQyNzgzODM1fQ.XRGFnRAvIoanZ18uFY-81GXqhRt2lQwzZ2qD8oGvT0I
