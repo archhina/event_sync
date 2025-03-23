@@ -43,8 +43,6 @@ create table Items (
     user_id int not null,
     item_name varchar(255) not null,
     item_category varchar(255) not null,
-    item_description text,
-    item_quantity int default 1,
     created_at datetime default current_timestamp,
     foreign key (event_id) references `Events`(event_id) on delete cascade,
     foreign key (user_id) references Users(user_id) on delete cascade
