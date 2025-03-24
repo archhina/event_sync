@@ -30,7 +30,7 @@ public class EventController {
         }
         event.setHost(new User());
         event.getHost().setUserId(userId);
-        Result<Event> result = service.createEvent(event);
+        Result<Event> result = service.saveEvent(event);
         if (!result.isSuccess()) {
             return new ResponseEntity<>(result.getErrorMessages(), result.getHttpStatus());
         }
@@ -68,10 +68,19 @@ public class EventController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
-        Result<Event> result = service.update(event);
+        Result<Event> result = service.saveEvent(event);
         if (!result.isSuccess()) {
             return new ResponseEntity<>(result.getErrorMessages(), result.getHttpStatus());
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/accepted")
+    public ResponseEntity<Object> getAcceptedEvents(@RequestHeader("Authorization") String jwt) {
+        Long userId = secretSigningKey.getUserId(jwt);
+        if (userId == null) {
+            return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(service.getAcceptedEvents(userId), HttpStatus.OK);
     }
 }

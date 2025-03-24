@@ -18,8 +18,8 @@ import java.util.List;
 @RequestMapping("/api/item")
 public class ItemController {
 
-    ItemService service;
-    SecretSigningKey secretSigningKey;
+    private ItemService service;
+    private SecretSigningKey secretSigningKey;
 
     public ItemController(ItemService service, SecretSigningKey secretSigningKey) {
         this.service = service;
