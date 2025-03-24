@@ -30,7 +30,7 @@ create table Invites (
     invite_id int primary key auto_increment,
     event_id int not null,
     user_id int not null,
-    isAccepted boolean default null,
+    is_accepted boolean default null,
     created_at datetime default current_timestamp,
     foreign key (event_id) references `Events`(event_id) on delete cascade,
     foreign key (user_id) references Users(user_id) on delete cascade,
