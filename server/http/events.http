@@ -1,10 +1,10 @@
 ### Create Event
 POST http://localhost:8080/api/events/create
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0Mjc3MjIwNCwiZXhwIjoxNzQyODU4NjA0fQ.ae2a9Lo4cckvvBSQXECOism4Oq9QiYbI2L7sz7eiyYE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0Mjg0NTE4MywiZXhwIjoxNzQyOTMxNTgzfQ.LnFdNa3XGH7fz-CJVUoinSFYS7Noofa8Yt9utaym2hs
 Content-Type: application/json
 
 {
-  "eventName": "Event private",
+  "eventName": "Event private 2",
   "eventDate": "2025-04-01T18:00:00",
   "eventLocation": "Dev10 Central",
   "isPrivate": true,
@@ -14,12 +14,28 @@ Content-Type: application/json
 
 }
 
+### edit event
+PUT http://localhost:8080/api/events/3
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0Mjg4NDQ5NCwiZXhwIjoxNzQyOTcwODk0fQ.fUqJkwO38aIPO7BpHa8xJ43pm537WZRpaZjm7_MSSm4
+Content-Type: application/json
+
+{
+  "eventId": 3,
+  "eventName": "Event private 2 - updated",
+  "eventDate": "2025-04-01T18:00:00",
+  "eventLocation": "Dev10 Central - updated",
+  "isPrivate": true,
+  "host": {
+    "userId": 1
+  }
+}
+
+### delete event
+DELETE http://localhost:8080/api/events/3
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0Mjg4NDQ5NCwiZXhwIjoxNzQyOTcwODk0fQ.fUqJkwO38aIPO7BpHa8xJ43pm537WZRpaZjm7_MSSm4
+
 ### Get all public events
 GET http://localhost:8080/api/events/public
-
-### get my events
-GET http://localhost:8080/api/events/accepted
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0Mjc5MzAzOCwiZXhwIjoxNzQyODc5NDM4fQ.8cwGTjvbIMIPPpVI014_eQOpG4HXEhc0oCmM3cGUOMw
 
 ### Get events by id
 GET http://localhost:8080/api/events/2

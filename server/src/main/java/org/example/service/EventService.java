@@ -80,10 +80,13 @@ public class EventService {
         return result;
     }
 
-    public Object getAcceptedEvents(Long userId) {
-        return inviteRepository.findByUser_UserIdAndIsAcceptedTrue(userId)
-                .stream()
-                .map(Invite::getEvent)
-                .collect(Collectors.toList());
+    public Result<Event> delete(Long eventId) {
+        Result<Event> result = new Result<>();
+        if (!eventRepository.existsById(eventId)) {
+            result.addErrorMessage("Event not found", HttpStatus.NOT_FOUND);
+            return result;
+        }
+        eventRepository.deleteById(eventId);
+        return result;
     }
 }

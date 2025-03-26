@@ -5,6 +5,9 @@ import org.example.models.Invite;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class InviteService {
 
@@ -48,7 +51,23 @@ public class InviteService {
 
     public Result<Invite> delete(Long inviteId) {
         Result<Invite> result = new Result<>();
+        if (!inviteRepository.existsById(inviteId)) {
+            result.addErrorMessage("Invite not found", HttpStatus.NOT_FOUND);
+            return result;
+        }
         inviteRepository.deleteById(inviteId);
         return result;
+    }
+
+    public List<Invite> getAcceptedInvites(Long userId) {
+        return inviteRepository.findByUser_UserIdAndIsAcceptedTrue(userId);
+    }
+
+    public List<Invite> getInvitesByUserIdAndNotAccepted(Long userId) {
+        return inviteRepository.findByUser_UserIdAndIsAcceptedFalse(userId);
+    }
+
+    public Invite findUserIdAndEventId(Long userId, Long eventId) {
+        return inviteRepository.findByUser_UserIdAndEvent_EventId(userId, eventId);
     }
 }

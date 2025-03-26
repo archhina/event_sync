@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/invite")
@@ -66,6 +68,14 @@ public class InviteController {
         if (!userExists.isSuccess()) {
             return new ResponseEntity<>(userExists.getErrorMessages(), userExists.getHttpStatus());
         }
+        if (userExists.getPayload().getUserId().equals(userId)) {
+            return new ResponseEntity<>(List.of("You cannot invite yourself"), HttpStatus.BAD_REQUEST);
+        }
+        Invite existingInvite = service.findUserIdAndEventId(userExists.getPayload().getUserId(), eventExists.getPayload().getEventId());
+        if (existingInvite != null) {
+            return new ResponseEntity<>(List.of("User is already invited to this event"), HttpStatus.BAD_REQUEST);
+        }
+
         invite.setUser(userExists.getPayload());
         invite.setEvent(eventExists.getPayload());
 //        invite.setIsAccepted(false);
@@ -115,5 +125,40 @@ public class InviteController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(result.getErrorMessages(), result.getHttpStatus());
+    }
+
+    @GetMapping("/accepted")
+    public ResponseEntity<Object> getAcceptedInvites(@RequestHeader("Authorization") String jwt) {
+        Long userId = secretSigningKey.getUserId(jwt);
+        if (userId == null) {
+            return new ResponseEntity<>(List.of("Unauthorized"), HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(service.getAcceptedInvites(userId), HttpStatus.OK);
+    }
+
+    @GetMapping()
+    public ResponseEntity<Object> getNotAcceptedInvites(@RequestHeader("Authorization") String jwt) {
+        Long userId = secretSigningKey.getUserId(jwt);
+        if (userId == null) {
+            return new ResponseEntity<>(List.of("Unauthorized"), HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(service.getInvitesByUserIdAndNotAccepted(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{eventId}")
+    public ResponseEntity<Object> getUserInvite(@PathVariable Long eventId, @RequestHeader("Authorization") String jwt) {
+        Long userId = secretSigningKey.getUserId(jwt);
+        if (userId == null) {
+            return new ResponseEntity<>(List.of("Unauthorized"), HttpStatus.UNAUTHORIZED);
+        }
+        Result<Event> eventExists = eventService.getEventById(eventId);
+        if (!eventExists.isSuccess()) {
+            return new ResponseEntity<>(eventExists.getErrorMessages(), eventExists.getHttpStatus());
+        }
+        Invite invite = service.findUserIdAndEventId(userId, eventExists.getPayload().getEventId());
+        if (invite == null) {
+            return new ResponseEntity<>(List.of("Invite not found"), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(invite, HttpStatus.OK);
     }
 }

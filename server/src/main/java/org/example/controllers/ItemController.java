@@ -42,7 +42,7 @@ public class ItemController {
 
         List<Item> userItems = service.findByUserIdAndItemCategory(userId, item.getItemCategory());
         if (!userItems.isEmpty()) {
-            return new ResponseEntity<>("User is already bringing an item of this category", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(List.of("User is already bringing an item of this category"), HttpStatus.BAD_REQUEST);
         }
         Result<Item> result = service.create(item);
         if (!result.isSuccess()) {
