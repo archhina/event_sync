@@ -56,7 +56,7 @@ public class UserController {
                 return new ResponseEntity<>(List.of("User is not verified"), HttpStatus.UNAUTHORIZED);
             }
             if (passwordEncoder.matches(user.getPassword(), result.getPayload().getPassword())) {
-                String jwtString = secretSigningKey.createJwt(result.getPayload().getUserId(), result.getPayload().getEmail());
+                String jwtString = secretSigningKey.createJwt(result.getPayload().getUserId(), result.getPayload().getEmail(), result.getPayload().getImageUrl());
                 Map<String, String> jwtMap = new HashMap<>();
                 jwtMap.put("jwt", jwtString);
 
@@ -67,5 +67,41 @@ public class UserController {
         } else {
             return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PutMapping
+    public ResponseEntity<Object> update(@RequestBody User user, @RequestHeader("Authorization") String jwt) {
+        Long userId = secretSigningKey.getUserId(jwt);
+        if (userId == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        if (!userId.equals(user.getUserId())) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        Result<User> existingUser = service.findByEmail(user.getEmail());
+        User updatedUser = existingUser.getPayload();
+        updatedUser.setImageUrl(user.getImageUrl());
+
+        Result<User> result = service.updateUser(updatedUser);
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getErrorMessages(), result.getHttpStatus());
+        }
+        return new ResponseEntity<>(result.getPayload(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<Object> delete(@PathVariable Long userId, @RequestHeader("Authorization") String jwt) {
+        Long authUserId = secretSigningKey.getUserId(jwt);
+        if (authUserId == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        if (!authUserId.equals(userId)) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
+        Result<User> result = service.deleteUser(userId);
+        if (!result.isSuccess()) {
+            return new ResponseEntity<>(result.getErrorMessages(), result.getHttpStatus());
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
