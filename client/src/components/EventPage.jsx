@@ -14,7 +14,7 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
   const [sides, setSides] = useState([])
   const [others, setOthers] = useState([])
 
-  const [joined, setJoined] = useState(false);
+  const [joined, setJoined] = useState(false)
 
   const params = useParams()
   
@@ -29,21 +29,21 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
       if (res.ok) {
         res.json()
         .then(items => {
-          const newMains = [];
-          const newSides = [];
-          const newOthers = [];
+          const newMains = []
+          const newSides = []
+          const newOthers = []
           items.forEach(item => {
             if (item.itemCategory === "Main Dish") {
-              newMains.push(item);
+              newMains.push(item)
             } else if (item.itemCategory === "Side/Appetizer") {
-              newSides.push(item);
+              newSides.push(item)
             } else {
-              newOthers.push(item);
+              newOthers.push(item)
             }
-          });
-          setMains(newMains);
-          setSides(newSides);
-          setOthers(newOthers);
+          })
+          setMains(newMains)
+          setSides(newSides)
+          setOthers(newOthers)
         })
       } else {
         res.json().then(err => console.error(err))
@@ -74,8 +74,8 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
         if (res.ok) {
           setJoined(true)
         }
-      });
-  };
+      })
+  }
 
   const handleJoin = () => {
     fetch(`http://localhost:8080/api/invite/${params.eventId}`, {
@@ -108,11 +108,21 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
       <div className="flex flex-col md:flex-row justify-around gap-6">
         <div className="w-full md:w-2/3"><EventCard event={event} /></div>
         <div className={`card lg:card-side w-full md:w-1/5 bg-base-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] my-6`}>
-          <div className="card-body text-center p-[1.15rem]">
-            <h2 className="card-title p-6 mx-auto w-fit pb-12 border-b">Host Contact Email:<br/>{event.host && event.host.email}</h2>
+          <div className="card-body text-center p-[.75rem]">
+            <div className="flex justify-center">
+              <img
+                src={event.host.imageUrl}
+                alt="Host Profile"
+                className="w-24 h-24 rounded-full border-2 border-primary object-cover"
+              />
+            </div>
+            <h2 className="card-title mx-auto w-fit border-b">
+              Host Contact Email:<br />
+              {event.host.email}
+            </h2>
             <div className="card-actions justify-center">
-              <button className={`btn btn-success btn-wide my-5`} disabled={joined || !loggedInUser} onClick={handleJoin}>{joined ? "Already Joined!" : loggedInUser ? "Join Event!" : 
-              "Login to Join!" }</button>
+              <button className="btn btn-success btn-wide mt-4" disabled={joined || !loggedInUser} onClick={handleJoin}>{joined ? "Already Joined!": loggedInUser ? "Join Event!": "Login to Join!"}
+              </button>
             </div>
           </div>
         </div>
@@ -129,4 +139,4 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
   )
 }
 
-export default EventPage;
+export default EventPage

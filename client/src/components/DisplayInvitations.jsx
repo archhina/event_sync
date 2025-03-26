@@ -72,6 +72,7 @@ const DisplayInvitations = ({ loggedInUser, setLoggedInUser, setMessage, setMess
             event={invite.event}
             onAccept={handleAccept}
             setShowInviteConfirm={setShowConfirm}
+            cardStyle={"disabled"}
           />
         ))}
     </div>
