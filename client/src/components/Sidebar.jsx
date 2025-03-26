@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import logo from '../assets/logo.png';
 
 
 
@@ -24,8 +25,9 @@ const Sidebar = ({ setNavMessage, loggedInUser }) => {
         md:translate-x-0 md:relative md:flex
       `}>
         {/* Sidebar Header */}
-        <div className="p-[18px] text-xl font-semibold shadow-md">
-          EventSync
+        <div className="h-16 text-xl font-semibold shadow-md">
+          <img src={logo} alt="" className="h-16 w-16 inline-block mr-2" />
+          <h1 className="inline-block pt-4">EventSync</h1>
         </div>
 
         {/* Navigation Links */}

@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useParams } from "react-router-dom";
 import AccountModal from "./AccountModal";
 
-const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setNavMessage }) => {
+const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setNavMessage, event, setOpenInvite }) => {
 
-  const location = useLocation();
-
-  
-
+  const location = useLocation()
+  const params = useParams()
+  const isEventPage = /^\/events\/\d+$/.test(location.pathname)
   return (
     <div>
       <div className="navbar bg-base-100 shadow-md fixed top-0 z-50 md:w-[calc(100%-16rem)]">
@@ -22,28 +21,34 @@ const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setN
           </ul> */}
         </div>
         <div className="navbar-end">
-        {(location.pathname === "/" || location.pathname === '/myevents') && loggedInUser && <Link to={'/create'} onClick={() => setNavMessage("Creating New Event")} className="btn btn-success btn-dash px-16 mr-4 ">Create Event</Link>}
+        {(location.pathname === "/" || location.pathname === '/myevents') && loggedInUser && <Link to={'/create'} onClick={() => setNavMessage("Creating New Event")} className="btn btn-success btn-outline px-16 mr-4 ">Create Event</Link>}
+        {event && event.host && isEventPage && loggedInUser && loggedInUser.email === event.host.email && <button onClick={() => {
+          setNavMessage("Inviting Users")
+          setOpenInvite(true)
+          }} className="btn btn-success btn-outline px-16 mr-4 ">Invite Users</button>}
           {loggedInUser ? (
-            <div className="dropdown dropdown-end">
-              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar mr-4">
-                <div className="w-10 rounded-full">
-                  <img width="60" height="60" src="https://img.icons8.com/ios-glyphs/60/user--v1.png" alt="user--v1"/>
+            <div className="flex items-center">
+              <div className="dropdown dropdown-end">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar mr-4">
+                  <div className="w-10 rounded-full">
+                    <img width="60" height="60" src="https://img.icons8.com/ios-glyphs/60/user--v1.png" alt="user--v1"/>
+                  </div>
                 </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                  <li>
+                    <a className="justify-between">
+                      Profile
+                    </a>
+                  </li>
+                  <li><button onClick={() => {
+                      setLoggedInUser(null)
+                      localStorage.removeItem("loggedInUser")
+                    }}>Logout</button></li>
+                </ul>
               </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                <li>
-                  <a className="justify-between">
-                    Profile
-                  </a>
-                </li>
-                <li><a>Settings</a></li>
-                <li><button onClick={() => {
-                    setLoggedInUser(null)
-                    localStorage.removeItem("loggedInUser")
-                  }}>Logout</button></li>
-              </ul>
+              <h2 className="text-lg font-semibold mr-4">{loggedInUser.email}</h2>
             </div>
           ): (
             <button className="btn mr-4" onClick={() => setOpen(!open)}>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -52,7 +53,7 @@ public class UserController {
         Result<User> result = service.findByEmail(user.getEmail());
         if (result.isSuccess()) {
             if (!result.getPayload().isVerified()) {
-                return new ResponseEntity<>("User is not verified", HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(List.of("User is not verified"), HttpStatus.UNAUTHORIZED);
             }
             if (passwordEncoder.matches(user.getPassword(), result.getPayload().getPassword())) {
                 String jwtString = secretSigningKey.createJwt(result.getPayload().getUserId(), result.getPayload().getEmail());
@@ -61,7 +62,7 @@ public class UserController {
 
                 return new ResponseEntity<>(jwtMap, HttpStatus.CREATED);
             } else {
-                return new ResponseEntity<>("Invalid Password", HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(List.of("Invalid Password"), HttpStatus.UNAUTHORIZED);
             }
         } else {
             return new ResponseEntity<>(result.getErrorMessages(), HttpStatus.NOT_FOUND);

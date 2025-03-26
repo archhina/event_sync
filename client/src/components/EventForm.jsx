@@ -1,16 +1,18 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EventForm = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
+
   const navigate = useNavigate()
+  const params = useParams()
 
   const [event, setEvent] = useState({
-    eventName: "",
+    eventName: "", 
     eventDescription: "",
     eventImage: "",
     eventDate: "",
     eventLocation: "",
-    private: false,
+    isPrivate: false,
   })
 
   const handleChange = (evt) => {
@@ -25,11 +27,10 @@ const EventForm = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle 
 
     let method = "POST"
     let url = "http://localhost:8080/api/events/create"
-    if (event.id) {
+    if (event.eventId) {
       method = "PUT"
-      url = "http://localhost:8080/api/events/" + event.id
+      url = "http://localhost:8080/api/events/" + event.eventId
     }
-
     fetch(url, {
       method: method,
       headers: {
@@ -56,6 +57,42 @@ const EventForm = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle 
       }
     })
   }
+
+  useState(() => {
+    if (params.eventId) {
+      fetch("http://localhost:8080/api/events/" + params.eventId, {
+        method: "GET",
+        headers : {
+          "Authorization": loggedInUser.jwt,
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => {
+        if (res.ok) {
+          res.json().then(eventData => {
+            setEvent({ ...eventData, isPrivate: eventData.private })
+          })
+        } else if (res.status === 401 || res.status === 403) {
+          setLoggedInUser(null)
+          localStorage.clear("loggedInUser")
+          navigate("/")
+          setMessage("Session expired. Please log in again.")
+          setMessageStyle("alert-error")
+        } else {
+          res.json().then(err => console.error(err))
+        }
+      })
+    } else {
+      setEvent({
+        eventName: "", 
+        eventDescription: "",
+        eventImage: "",
+        eventDate: "",
+        eventLocation: "",
+        isPrivate: false,
+      })
+    }
+  }, [params.eventId, loggedInUser])
 
   return (
     <div className="p-6 bg-base-100 shadow-md rounded-lg max-w-lg mx-auto">
@@ -123,14 +160,14 @@ const EventForm = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle 
         <legend className="fieldset-legend">Event Privacy:</legend>
           <label className="flex items-center" />          <input
               type="checkbox"
-              name="private"
+              name="isPrivate"
               className="toggle"
-              checked={event.private}
+              checked={event.isPrivate}
               onChange={handleChange}
             />
         </fieldset>
         <button type="submit" className="btn btn-primary w-full">
-          Create Event
+          {params.eventId ? "Update Event": "Create Event"}
         </button>
       </form>
     </div>

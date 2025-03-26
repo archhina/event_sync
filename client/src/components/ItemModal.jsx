@@ -51,7 +51,7 @@ const ItemModal = ({ setOpen, fetchItems, loggedInUser, setLoggedInUser, itemTyp
   return (
     <div className="modal modal-open">
       <div className="modal-box">
-        <button aria-label="Close" onClick={() => setOpen(false)} className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4">
+        <button aria-label="Close" onClick={() => setOpen(false)} className="btn btn-sm btn-square btn-outline btn-error absolute right-4 top-4">
           ✕
         </button>
         <h2 className="text-2xl font-semibold text-center mb-6">{`Add ` + itemType}</h2>
@@ -69,7 +69,7 @@ const ItemModal = ({ setOpen, fetchItems, loggedInUser, setLoggedInUser, itemTyp
             <input id="itemName" type="text" name="itemName" placeholder="Item Name" className="input input-bordered w-full" value={item.itemName} onChange={handleChange}/>
           </div>
           <div className="flex justify-center gap-3 pt-4 w-3/4">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-success btn-outline">
               Add Item
             </button>
             <button type="button" className="btn btn-outline" onClick={() => setOpen(false)}>

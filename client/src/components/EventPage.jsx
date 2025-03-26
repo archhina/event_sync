@@ -4,9 +4,9 @@ import EventCard from "./EventCard"
 import ItemModal from "./ItemModal"
 import ItemTable from "./ItemTable"
 
-const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
+const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle, event, setEvent }) => {
 
-  const [event, setEvent] = useState({})
+  // const [event, setEvent] = useState({})
 
   const [open, setOpen] = useState(false)
 
@@ -15,6 +15,8 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle 
   const [mains, setMains] = useState([])
   const [sides, setSides] = useState([])
   const [others, setOthers] = useState([])
+
+  const [joined, setJoined] = useState(false);
 
   const params = useParams()
   
@@ -55,13 +57,52 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle 
     fetch("http://localhost:8080/api/events/" + params.eventId)
       .then(res => {
         if (res.ok) {
-          res.json().then(event => setEvent(event))
+          res.json().then(fetchedEvent => setEvent(fetchedEvent))
         } else {
           res.json().then(err => console.error(err))
         }
         fetchItems()
+        checkIfJoined()
       })
   }, [params.eventId])
+
+  const checkIfJoined = () => {
+    fetch("http://localhost:8080/api/invite/" + params.eventId, {
+      headers: {
+        Authorization: loggedInUser.jwt,
+      },
+    })
+      .then(res => {
+        if (res.ok) {
+          setJoined(true)
+        }
+      });
+  };
+
+  const handleJoin = () => {
+    fetch(`http://localhost:8080/api/invite/${params.eventId}`, {
+      method: "POST",
+      headers: {
+        Authorization: loggedInUser.jwt      }
+    })
+    .then(res => {
+      if (res.ok) {
+        checkIfJoined()
+        setMessage("Successfully joined the event")
+        setMessageStyle("alert-success")
+      } else if (res.status === 401 || res.status === 403) {
+        setLoggedInUser(null)
+        localStorage.clear("loggedInUser")
+        setMessage("Session expired. Please log in again.")
+        setMessageStyle("alert-error")
+      } else {
+        res.json().then(err => {
+          setMessage("Failed to join the event: " + err)
+          setMessageStyle("alert-error")
+        })
+      }
+    })
+  }
 
   return (
     <div className="">
@@ -72,7 +113,7 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle 
           <div className="card-body text-center p-[1.15rem]">
             <h2 className="card-title p-6 mx-auto w-fit pb-12 border-b">Host Contact Email:<br/>{event.host && event.host.email}</h2>
             <div className="card-actions justify-center">
-              <button className="btn btn-success btn-wide my-5">Join Event</button>
+              <button className={`btn btn-success btn-wide my-5`} disabled={joined} onClick={handleJoin}>{joined ? "Already Joined!" : "Join Event!" }</button>
             </div>
           </div>
         </div>

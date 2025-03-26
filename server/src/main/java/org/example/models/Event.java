@@ -14,7 +14,7 @@ public class Event {
     private Long eventId;
 
     @ManyToOne
-    @JoinColumn(name = "hostId", nullable = false)
+    @JoinColumn(name = "host_id", nullable = false)
     private User host;
 
     private String eventName;

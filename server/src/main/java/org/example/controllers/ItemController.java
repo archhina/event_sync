@@ -18,8 +18,8 @@ import java.util.List;
 @RequestMapping("/api/item")
 public class ItemController {
 
-    ItemService service;
-    SecretSigningKey secretSigningKey;
+    private ItemService service;
+    private SecretSigningKey secretSigningKey;
 
     public ItemController(ItemService service, SecretSigningKey secretSigningKey) {
         this.service = service;
@@ -42,7 +42,7 @@ public class ItemController {
 
         List<Item> userItems = service.findByUserIdAndItemCategory(userId, item.getItemCategory());
         if (!userItems.isEmpty()) {
-            return new ResponseEntity<>("User is already bringing an item of this category", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(List.of("User is already bringing an item of this category"), HttpStatus.BAD_REQUEST);
         }
         Result<Item> result = service.create(item);
         if (!result.isSuccess()) {

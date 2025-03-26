@@ -1,0 +1,29 @@
+### Join public event
+POST http://localhost:8080/api/invite/1
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWNoaGluYUBkZXYtMTAuY29tIiwiaWF0IjoxNzQyNzcxMTQxLCJleHAiOjE3NDI4NTc1NDF9.GluCr25HtmILbjYhFT5PAq2GBwWTGJRwYj9SBLBtkMg
+
+### Invite user to private event
+POST http://localhost:8080/api/invite
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0Mjc3MjIwNCwiZXhwIjoxNzQyODU4NjA0fQ.ae2a9Lo4cckvvBSQXECOism4Oq9QiYbI2L7sz7eiyYE
+Content-Type: application/json
+
+{
+  "event": {
+    "eventId": 2
+  },
+  "user": {
+    "email": "achhina@dev-10.com"
+  }
+}
+
+### Accept invite
+PUT http://localhost:8080/api/invite/3
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWNoaGluYUBkZXYtMTAuY29tIiwiaWF0IjoxNzQyODI5NjI5LCJleHAiOjE3NDI5MTYwMjl9.OoBskKGti5MxnrRyUEtDz7bxS3miFtkcQ524HeJjKtQ
+
+### Decline invite
+DELETE http://localhost:8080/api/invite/3
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWNoaGluYUBkZXYtMTAuY29tIiwiaWF0IjoxNzQyODI5OTkzLCJleHAiOjE3NDI5MTYzOTN9.AsOVjsvU5uGFJcDBZ5P0LdYwJQVemVd6-PRI6D8fvPk
+
+### Get my events
+GET http://localhost:8080/api/invite/accepted
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWNoaGluYUBkZXYtMTAuY29tIiwiaWF0IjoxNzQyODQyNTg3LCJleHAiOjE3NDI5Mjg5ODd9.FAjJc9ZubZKzRCL02m8_TiTBmUTGWHo8fVGNWrKPeCw

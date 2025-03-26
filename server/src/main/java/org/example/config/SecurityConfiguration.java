@@ -28,7 +28,11 @@ public class SecurityConfiguration {
                             "api/events/{eventId}",
 //                            "api/item/{itemId}",
                             "api/item/*",
-                            "api/item"
+                            "api/item",
+                            "api/invite/*",
+                            "api/invite"
+//                            "api/invite/{eventId}"
+//                            "api/invite/:eventId"
                     ).permitAll() // Public endpoints
                     .anyRequest().authenticated() // Require authentication for other endpoints
             )

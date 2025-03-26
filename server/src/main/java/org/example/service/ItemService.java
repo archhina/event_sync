@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class ItemService {
 
-    ItemRepository itemRepository;
+    private ItemRepository itemRepository;
 
     public ItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
