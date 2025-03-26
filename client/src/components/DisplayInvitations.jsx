@@ -2,10 +2,11 @@ import { useEffect, useState } from "react"
 import EventCard from "./EventCard";
 import ConfirmModal from "./ConfirmModal";
 
-const DisplayInvitations = ({ loggedInUser, setMessage, setMessageStyle }) => {
+const DisplayInvitations = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
 
   const [invites, setInvites] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false)
+  const [hasFinishedFetching, setHasFinishedFetching] = useState(false);
 
   const fetchInvites = () => {
     fetch("http://localhost:8080/api/invite", {
@@ -13,9 +14,19 @@ const DisplayInvitations = ({ loggedInUser, setMessage, setMessageStyle }) => {
         Authorization: loggedInUser.jwt,
       },
     })
-      .then((res) => res.json())
-      .then((data) => setInvites(data))
-      .catch((err) => console.error("Failed to load invites:", err))
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          setLoggedInUser(null);
+          localStorage.clear("loggedInUser");
+          setMessage("Session expired. Please log in again.");
+          setMessageStyle("alert-error");
+        }
+        return res.json();
+      })
+      .then((fetchedInvites) => {
+        setInvites(fetchedInvites);
+        setHasFinishedFetching(true);
+      })
   }
 
   const handleAccept = (inviteId) => {
@@ -40,11 +51,18 @@ const DisplayInvitations = ({ loggedInUser, setMessage, setMessageStyle }) => {
     fetchInvites()
   }, [])
 
+  if(invites.length === 0) {
+    if (hasFinishedFetching) {
+      return <p>No pending invitations.</p>
+    } else {
+      return <p>Loading...</p>
+    }
+  }
+
   return (
     <div className="max-w-3/4 mx-auto px-4 py-8">
       {showConfirm && <ConfirmModal setOpen={setShowConfirm} message="Are you sure you want to decline this invite?" onConfirm={handleDecline}/>}
-      {invites ? (
-        invites.map((invite) => (
+      {invites.map((invite) => (
           <EventCard
             key={invite.event.eventId}
             loggedInUser={loggedInUser}
@@ -55,10 +73,7 @@ const DisplayInvitations = ({ loggedInUser, setMessage, setMessageStyle }) => {
             onAccept={handleAccept}
             setShowInviteConfirm={setShowConfirm}
           />
-        ))
-      ) : (
-        <p>No pending invitations.</p>
-      )}
+        ))}
     </div>
   )
 }

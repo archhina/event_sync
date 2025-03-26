@@ -19,10 +19,11 @@ public class SecretSigningKey {
         key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
-    public String createJwt(Long userId, String email) {
+    public String createJwt(Long userId, String email, String imageUrl) {
         return Jwts.builder()
                 .claim("userId", userId)
                 .claim("email", email)
+                .claim("imageUrl", imageUrl)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 86400000)) // 1 day
                 .signWith(getKey())

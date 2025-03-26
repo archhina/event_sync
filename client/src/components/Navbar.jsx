@@ -31,16 +31,16 @@ const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setN
               <div className="dropdown dropdown-end">
                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar mr-4">
                   <div className="w-10 rounded-full">
-                    <img width="60" height="60" src="https://img.icons8.com/ios-glyphs/60/user--v1.png" alt="user--v1"/>
+                    <img width="60" height="60" src={loggedInUser && loggedInUser.imageUrl ? `${loggedInUser.imageUrl}` : `https://img.icons8.com/ios-glyphs/60/user--v1.png`} alt="user-profile"/>
                   </div>
                 </div>
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow">
                   <li>
-                    <a className="justify-between">
+                    <Link className="justify-between" to={"/profile"} onClick={() => setNavMessage("User Profile")}>
                       Profile
-                    </a>
+                    </Link>
                   </li>
                   <li><button onClick={() => {
                       setLoggedInUser(null)

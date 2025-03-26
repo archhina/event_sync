@@ -10,6 +10,7 @@ import EventForm from './components/EventForm'
 import EventPage from './components/EventPage'
 import InviteModal from './components/InviteModal'
 import DisplayInvitations from './components/DisplayInvitations'
+import ProfilePage from './components/ProfilePage'
 
 function App() {
 
@@ -58,11 +59,15 @@ function App() {
               <Route path='/events/:eventId' element={<EventPage loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} event={event} setEvent={setEvent} />} />
               {/* MyEvents Page */}
               <Route path='/myevents' element={ loggedInUser === null ?
-							<Navigate to="/" /> : <DisplayEvents loggedInUser={loggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
+							<Navigate to="/" /> : <DisplayEvents loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
 
               {/* Invitations Page */}
               <Route path='/invitations' element={ loggedInUser === null ?
-              <Navigate to="/" /> : <DisplayInvitations loggedInUser={loggedInUser} /> } />
+              <Navigate to="/" /> : <DisplayInvitations loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
+
+              {/* Profile Page */}
+              <Route path='/profile' element={ loggedInUser === null ?
+              <Navigate to="/" /> : <ProfilePage loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
 
               {/* Default/NotFound Page */}
               <Route path='*' element={<h1>Not Found</h1>} />

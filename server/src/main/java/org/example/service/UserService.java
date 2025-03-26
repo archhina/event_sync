@@ -47,6 +47,7 @@ public class UserService {
         newUser.setEmail(user.getEmail());
         newUser.setPassword(hashedPassword);
         newUser.setVerificationCode(code);
+        newUser.setImageUrl(user.getImageUrl());
 
         userRepository.save(newUser);
 
@@ -78,6 +79,25 @@ public class UserService {
         } else {
             result.setPayload(user);
         }
+        return result;
+    }
+
+
+    public Result<User> updateUser(User user) {
+        Result<User> result = new Result<>();
+        userRepository.save(user);
+        result.setPayload(user);
+        return result;
+    }
+
+    public Result<User> deleteUser(Long userId) {
+        Result<User> result = new Result<>();
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            result.addErrorMessage("User not found", HttpStatus.NOT_FOUND);
+            return result;
+        }
+        userRepository.delete(user);
         return result;
     }
 }

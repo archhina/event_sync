@@ -27,6 +27,8 @@ public class SecurityConfiguration {
                             "api/events/create",
                             "api/events/{eventId}",
 //                            "api/item/{itemId}",
+                            "api/users",
+                            "api/users/{userId}",
                             "api/item/*",
                             "api/item",
                             "api/invite/*",
