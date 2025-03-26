@@ -57,8 +57,8 @@ public class UserService {
         return result;
     }
 
-    public Result<Boolean> verifyUser(String code) {
-        Result<Boolean> result = new Result<>();
+    public Result<User> verifyUser(String code) {
+        Result<User> result = new Result<>();
         User user = userRepository.findByVerificationCode(code);
         if (user == null) {
             result.addErrorMessage("Invalid verification code", HttpStatus.BAD_REQUEST);
@@ -67,7 +67,7 @@ public class UserService {
         user.setVerified(true);
         user.setVerificationCode(null);
         userRepository.save(user);
-        result.setPayload(true);
+        result.setPayload(user);
         return result;
     }
 

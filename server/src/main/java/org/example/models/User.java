@@ -15,7 +15,7 @@ public class User {
 
     private String username;
 
-    private String imageUrl;
+    private String imageUrl = "https://img.icons8.com/ios-glyphs/60/user--v1.png";
 
     private String email;
 
