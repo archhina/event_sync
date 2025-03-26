@@ -11,6 +11,7 @@ import EventPage from './components/EventPage'
 import InviteModal from './components/InviteModal'
 import DisplayInvitations from './components/DisplayInvitations'
 import ProfilePage from './components/ProfilePage'
+import VerificationPage from './components/VerificationPage'
 
 function App() {
 
@@ -68,6 +69,8 @@ function App() {
               {/* Profile Page */}
               <Route path='/profile' element={ loggedInUser === null ?
               <Navigate to="/" /> : <ProfilePage loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
+
+              <Route path='/verify' element={ <VerificationPage setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
 
               {/* Default/NotFound Page */}
               <Route path='*' element={<h1>Not Found</h1>} />

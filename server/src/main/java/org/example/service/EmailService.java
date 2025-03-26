@@ -15,7 +15,7 @@ public class EmailService {
 
     public void sendVerificationEmail(String email, String code) {
         String subject = "Please Verify Your Email";
-        String verificationLink = "http://localhost:8080/verify?code=" + code;
+        String verificationLink = "http://localhost:5173/verify?code=" + code;
         String message = "Click the link to verify your EventSync account:\n" + verificationLink;
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();

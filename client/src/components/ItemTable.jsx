@@ -35,6 +35,7 @@ const ItemTable = ({ items, itemType, handleModal, fetchItems, loggedInUser, set
           <thead>
             <tr>
               <th></th>
+              <th></th>
               <th>Email</th>
               <th>{itemType}</th>
               {loggedInUser && <th><button className="btn btn-square btn-sm btn-outline btn-success text-lg" onClick={() => handleModal(itemType)}>+</button></th>}
@@ -44,9 +45,10 @@ const ItemTable = ({ items, itemType, handleModal, fetchItems, loggedInUser, set
             {items.map((item, index) => (
               <tr key={item.itemId} className="hover:bg-base-300">
                 <th>{index + 1}</th>
+                <td><img width="22" height="22" src={item.user.imageUrl} alt="user-profile"/></td>
                 <td>{item.user.email}</td>
                 <td>{item.itemName}</td>
-                {loggedInUser && loggedInUser.email === item.user.email && <td><button className="btn btn-sm btn-square btn-outline btn-error" onClick={() => handleDelete(item.itemId)}>✕</button></td>}
+                {loggedInUser ? loggedInUser.email === item.user.email && <td><button className="btn btn-sm btn-square btn-outline btn-error" onClick={() => handleDelete(item.itemId)}>✕</button></td>: <td></td>}
               </tr>
             ))}
           </tbody>

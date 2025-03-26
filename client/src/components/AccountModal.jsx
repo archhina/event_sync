@@ -93,7 +93,7 @@ const AccountModal = ({ open, setOpen, setLoggedInUser, setMessage, setMessageSt
     <div className="modal modal-open">
       <div className="modal-box">
         <div className="relative w-full flex items-center justify-center">
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-0 top-0" onClick={() => setOpen(false)}>✕</button>
+          <button className="btn btn-sm btn-circle btn-ghost absolute right-0 top-0" disabled={loading} onClick={() => setOpen(false)}>✕</button>
           <h2 className="text-xl font-bold mb-4 text-center">{login ? `User Login`: "User Registration"}</h2>
         </div>
         
@@ -118,11 +118,11 @@ const AccountModal = ({ open, setOpen, setLoggedInUser, setMessage, setMessageSt
             </p>
           </div>
           {/* {login ? <a href="#" className="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a> : null} */}
-          <button type="submit" className="btn btn-primary w-full mt-2">{loading ? <span className="loading loading-bars loading-sm"></span> : login ? "Login" : "Sign Up"}</button>
+          <button type="submit" className="btn btn-primary w-full mt-2" disabled={loading} >{loading ? <span className="loading loading-bars loading-sm"></span> : login ? "Login" : "Sign Up"}</button>
           
         </form>
         <div className="text-sm font-medium text-gray-500 dark:text-gray-300 text-center mt-4">
-        {login ? "Not registered?" : "Already have an account?"} <button onClick={() => setLogin(!login)} className="text-blue-700 hover:underline dark:text-blue-500">{login ? "Register" : "Login"}</button>
+        {login ? "Not registered?" : "Already have an account?"} <button onClick={() => setLogin(!login)} className="text-blue-700 cursor-pointer hover:underline dark:text-blue-500">{login ? "Register" : "Login"}</button>
         </div>
         {/* <div className="modal-action">
           <button onClick={() => setOpen(false)} className="btn">

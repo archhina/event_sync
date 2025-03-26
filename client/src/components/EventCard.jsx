@@ -56,7 +56,7 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
   return (
     <>
       {showConfirm && <ConfirmModal setOpen={setShowConfirm} message="Are you sure you want to remove this event?" onConfirm={handleDelete}/>}
-      <div className={`card lg:card-side bg-base-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] my-6 ${cardStyle && cardStyle} `} onClick={() => navigate(`/events/${event.eventId}`)}>
+      <div className={`card lg:card-side bg-base-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] my-6 ${cardStyle && cardStyle} `} onClick={cardStyle === "disabled" ? undefined : () => navigate(`/events/${event.eventId}`)}>
         <figure className="w-full lg:w-1/3 h-64 overflow-hidden">
           <img
             src={event.eventImage ? event.eventImage: "https://plasticcontainercity.com/media/magefan_blog/title2.jpg"}

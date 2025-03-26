@@ -41,7 +41,7 @@ public class UserController {
 
     @GetMapping("/verify")
     public ResponseEntity<Object> verify(@RequestParam String code) {
-        Result<Boolean> result = service.verifyUser(code);
+        Result<User> result = service.verifyUser(code);
         if (!result.isSuccess()) {
             return new ResponseEntity<>(result.getErrorMessages(), result.getHttpStatus());
         }
