@@ -26,24 +26,20 @@ const InviteModal = ({ setOpen, onInvite, loggedInUser, event, setMessage, setMe
     })
     .then(res => {
       if (res.ok) {
-        debugger
         setMessage("Invite sent successfully")
         setMessageStyle("alert-success")
         setOpen(false)
         return res.json()
       } else if (res.status === 404) {
-        debugger
         setMessage("User not found")
         setMessageStyle("alert-error")
         setOpen(false)
       } else if (res.status === 401 || res.status === 403) {
-        debugger
         setMessage("Session expired. Please log in again.")
         setMessageStyle("alert-error")
         setOpen(false)
       } else {
         res.json().then(err => {
-          debugger
           setMessage("Failed to send invite: " + err)
           setMessageStyle("alert-error")
           setOpen(false)

@@ -6,8 +6,6 @@ import ItemTable from "./ItemTable"
 
 const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle, event, setEvent }) => {
 
-  // const [event, setEvent] = useState({})
-
   const [open, setOpen] = useState(false)
 
   const [itemType, setItemType] = useState("Item")
@@ -113,7 +111,8 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
           <div className="card-body text-center p-[1.15rem]">
             <h2 className="card-title p-6 mx-auto w-fit pb-12 border-b">Host Contact Email:<br/>{event.host && event.host.email}</h2>
             <div className="card-actions justify-center">
-              <button className={`btn btn-success btn-wide my-5`} disabled={joined} onClick={handleJoin}>{joined ? "Already Joined!" : "Join Event!" }</button>
+              <button className={`btn btn-success btn-wide my-5`} disabled={joined || !loggedInUser} onClick={handleJoin}>{joined ? "Already Joined!" : loggedInUser ? "Join Event!" : 
+              "Login to Join!" }</button>
             </div>
           </div>
         </div>
@@ -121,11 +120,6 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
       
       <div className="flex flex-col lg:flex-row gap-4 mt-6 mx-11">
         <ItemTable items={mains} itemType={"Main Dish"} handleModal={handleModal} fetchItems={fetchItems} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} />
-            {/* <h2 className="card-title text-center">Main Dishes : {mains ? mains.length: 0}</h2>
-            <button className="btn btn-square btn-sm absolute top-5 right-5 text-lg" onClick={() => handleModal("Main Dish")}>+</button>
-            {mains && mains.map(item => <p>{item.itemName}</p>)}
-          </div>
-        </div> */}
         <div className="divider lg:divider-horizontal"></div>
         <ItemTable items={sides} itemType={"Side/Appetizer"} handleModal={handleModal} fetchItems={fetchItems} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} />
         <div className="divider lg:divider-horizontal"></div>

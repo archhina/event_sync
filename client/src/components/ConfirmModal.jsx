@@ -8,7 +8,7 @@ const ConfirmModal = ({ setOpen, onConfirm, message = "Are you sure?" }) => {
         <h2 className="text-2xl font-semibold text-center mb-6">
           Confirm Action
         </h2>
-        <p className="text-center text-base border-b pb-6 px-4">{message}</p>
+        <p className="text-center text-base border-b pb-6 px-4 whitespace-pre-line">{message}</p>
         <div className="flex justify-center gap-3 pt-4 w-3/4 mx-auto">
           <button className="btn btn-error btn-outline" onClick={() => {
              onConfirm()

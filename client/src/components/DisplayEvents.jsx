@@ -3,7 +3,7 @@ import EventCard from "./EventCard";
 import ConfirmModal from "./ConfirmModal";
 import { useLocation } from "react-router-dom";
 
-const DisplayEvents = ({ loggedInUser, setMessage, setMessageStyle }) => {
+const DisplayEvents = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
 
   const [events, setEvents] = useState([])
   const [invites, setInvites] = useState([])
@@ -13,23 +13,31 @@ const DisplayEvents = ({ loggedInUser, setMessage, setMessageStyle }) => {
   const fetchData = () => {
     {location.pathname !== "/myevents" ?
       fetch("http://localhost:8080/api/events/public")
-      .then(res => res.json())
-      .then(fetchedEvents => {
-        setEvents(fetchedEvents)
-        setHasFinishedFetching(true)
-      })
+        .then(res => res.json())
+        .then(fetchedEvents => {
+          setEvents(fetchedEvents)
+          setHasFinishedFetching(true)
+        })
       :
       fetch("http://localhost:8080/api/invite/accepted", {
         method: "GET",
         headers: {
-          "Authorization": loggedInUser.jwt
-        }
+          Authorization: loggedInUser.jwt,
+        },
       })
-      .then(res => res.json())
-      .then(fetchedInvites => {
-        setInvites(fetchedInvites)
-        setHasFinishedFetching(true)
-      })  
+        .then((res) => {
+          if (res.status === 401 || res.status === 403) {
+            setLoggedInUser(null);
+            localStorage.clear("loggedInUser");
+            setMessage("Session expired. Please log in again.");
+            setMessageStyle("alert-error");
+          }
+          return res.json();
+        })
+        .then((fetchedInvites) => {
+          setInvites(fetchedInvites);
+          setHasFinishedFetching(true);
+        })
     }
   }
   
@@ -48,11 +56,11 @@ const DisplayEvents = ({ loggedInUser, setMessage, setMessageStyle }) => {
   return (
     <div>
       {location.pathname !== "/myevents" ?
-      <div className="mx-32">
+      <div className="max-w-3/4 mx-auto px-4 py-8">
         {events.map(event => <EventCard key={event.eventId} event={event} cardStyle={"cursor-pointer hover:scale-101 transition duration-300 ease-in-out"} />)}
       </div>
       :
-      <div className="mx-32">
+      <div className="max-w-3/4 mx-auto px-4 py-8">
         {invites.map(invite => <EventCard key={invite.event.eventId} inviteId={invite.inviteId} event={invite.event} loggedInUser={loggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} cardStyle={"cursor-pointer hover:scale-101 transition duration-300 ease-in-out"} fetchData={fetchData} />)}
       </div>
   }
