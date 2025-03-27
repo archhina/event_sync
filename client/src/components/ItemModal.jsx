@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"
 
 const ItemModal = ({ setOpen, fetchItems, loggedInUser, setLoggedInUser, itemType, setMessage, setMessageStyle, eventId}) => {
 
@@ -79,7 +79,7 @@ const ItemModal = ({ setOpen, fetchItems, loggedInUser, setLoggedInUser, itemTyp
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ItemModal;
+export default ItemModal

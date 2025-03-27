@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Link, NavLink, useLocation, useParams } from "react-router-dom";
-import AccountModal from "./AccountModal";
+import { useState } from "react"
+import { Link, NavLink, useLocation, useParams } from "react-router-dom"
+import AccountModal from "./AccountModal"
 
 const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setNavMessage, event, setOpenInvite }) => {
 
@@ -14,11 +14,6 @@ const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setN
           <p className="text-xl font-semibold ml-4">{navMessage}</p>
         </div>
         <div className="navbar-center hidden lg:flex">
-          {/* <ul className="menu menu-horizontal px-1">
-            <li><NavLink to={'/'}>Link 1</NavLink></li>
-            <li><NavLink to={'/'}>Link 2</NavLink></li>
-            <li><NavLink to={'/'}>Link 3</NavLink></li>
-          </ul> */}
         </div>
         <div className="navbar-end">
         {(location.pathname === "/" || location.pathname === '/myevents') && loggedInUser && <Link to={'/create'} onClick={() => setNavMessage("Creating New Event")} className="btn btn-success btn-outline px-16 mr-4 ">Create Event</Link>}
@@ -58,9 +53,8 @@ const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setN
           )}
         </div>
       </div>
-      
     </div>
   )
-};
+}
 
-export default Navbar;
+export default Navbar

@@ -56,6 +56,6 @@ const ItemTable = ({ items, itemType, handleModal, fetchItems, loggedInUser, set
       </div>
     </div>
   )
-};
+}
 
-export default ItemTable;
+export default ItemTable

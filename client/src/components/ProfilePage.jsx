@@ -1,6 +1,6 @@
-import { useState } from "react";
-import ConfirmModal from "./ConfirmModal";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react"
+import ConfirmModal from "./ConfirmModal"
+import { useNavigate } from "react-router-dom"
 
 const ProfilePage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
 
@@ -64,8 +64,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyl
     <div className="max-w-xl mx-auto mt-12 p-6 rounded-lg shadow-lg bg-base-100">
       {open && <ConfirmModal setOpen={setOpen} onConfirm={handleDelete} message={`Are you sure you want to PERMANENTLY delete your account along with it's data?\n\nThis action cannot be undone.`} />}
       <h2 className="text-3xl font-semibold text-center mb-6">User Profile</h2>
-
-      {/* Profile Picture */}
+      
       <div className="flex justify-center mb-6">
         <img src={imageUrl} alt="Profile" className="rounded-full w-32 h-32 object-cover border-2 border-white" />
       </div>

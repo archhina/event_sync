@@ -1,7 +1,6 @@
-import { useNavigate, useParams } from "react-router-dom";
-import ConfirmModal from "./ConfirmModal";
-import { useState } from "react";
-import EventForm from "./EventForm";
+import { useNavigate, useParams } from "react-router-dom"
+import ConfirmModal from "./ConfirmModal"
+import { useState } from "react"
 
 
 const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessage, setMessageStyle, fetchData, onAccept, setShowInviteConfirm }) => {
@@ -23,11 +22,6 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
           setMessageStyle("alert-success")
           setShowConfirm(false)
           fetchData()
-        } else {
-          res.json().then(err => console.error(err))
-          setMessage("Failed to remove event")
-          setMessageStyle("alert-error")
-          setShowConfirm(false)
         }
       })
     } else {
@@ -43,11 +37,6 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
           setMessageStyle("alert-success")
           setShowConfirm(false)
           fetchData()
-        } else {
-          res.json().then(err => console.error(err))
-          setMessage("Failed to remove event")
-          setMessageStyle("alert-error")
-          setShowConfirm(false)
         }
       })
     }
@@ -69,22 +58,16 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
               <div className="-mt-1">
                 {onAccept ? (
                   <div className="flex gap-4">
-                    <button
-                      className="btn btn-sm btn-outline btn-success"
-                      onClick={(evt) => {
-                        evt.stopPropagation();
-                        onAccept(invite.inviteId);
-                      }}
-                    >
+                    <button className="btn btn-sm btn-outline btn-success" onClick={(evt) => {
+                        evt.stopPropagation()
+                        onAccept(invite.inviteId)
+                      }}>
                       Accept
                     </button>
-                    <button
-                      className="btn btn-sm btn-outline btn-error"
-                      onClick={(evt) => {
-                        evt.stopPropagation();
-                        setShowInviteConfirm(true);
-                      }}
-                    >
+                    <button className="btn btn-sm btn-outline btn-error" onClick={(evt) => {
+                        evt.stopPropagation()
+                        setShowInviteConfirm(true)
+                      }}>
                       Decline
                     </button>
                   </div>
@@ -115,13 +98,10 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
             <div className="badge badge-primary text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📅 Date:</strong> {new Date(event.eventDate).toLocaleString()}</div>
             <div className="badge badge-warning text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📍 Location:</strong> {event.eventLocation}</div>
           </div>
-          {/* <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div> */}
         </div>
       </div>
     </>
   )
-};
+}
 
-export default EventCard;
+export default EventCard

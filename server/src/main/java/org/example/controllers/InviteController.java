@@ -157,7 +157,7 @@ public class InviteController {
         }
         Invite invite = service.findUserIdAndEventId(userId, eventExists.getPayload().getEventId());
         if (invite == null) {
-            return new ResponseEntity<>(List.of("Invite not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(List.of("Invite not found"), HttpStatus.OK);
         }
         return new ResponseEntity<>(invite, HttpStatus.OK);
     }

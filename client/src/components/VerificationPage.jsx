@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate, useSearchParams } from "react-router-dom"
 
-const VerificationPage = ({ setLoggedInUser, setMessage, setMessageStyle }) => {
+const VerificationPage = ({ setMessage, setMessageStyle }) => {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
