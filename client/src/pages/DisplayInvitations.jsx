@@ -53,9 +53,9 @@ const DisplayInvitations = ({ loggedInUser, setLoggedInUser, setMessage, setMess
 
   if(invites.length === 0) {
     if (hasFinishedFetching) {
-      return <p>No pending invitations.</p>
+      return <p className="text-center">No pending invitations.</p>
     } else {
-      return <p>Loading...</p>
+      return <p className="text-center">Loading...</p>
     }
   }
 

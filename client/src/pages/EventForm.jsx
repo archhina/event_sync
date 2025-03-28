@@ -95,7 +95,7 @@ const EventForm = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle 
   }, [params.eventId, loggedInUser])
 
   return (
-    <div className="p-6 bg-base-100 shadow-md rounded-lg max-w-lg mx-auto">
+    <div className="p-6 bg-base-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] rounded-lg max-w-lg mx-auto mt-6">
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <fieldset className="fieldset">

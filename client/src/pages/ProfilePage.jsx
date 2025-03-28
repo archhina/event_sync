@@ -62,7 +62,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyl
   }
 
   return (
-    <div className="max-w-xl mx-auto mt-12 p-6 rounded-lg shadow-lg bg-base-100">
+    <div className="max-w-xl mx-auto mt-12 p-6 rounded-lg drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] bg-base-100">
       {open && <ConfirmModal setOpen={setOpen} onConfirm={handleDelete} message={`Are you sure you want to PERMANENTLY delete your account along with it's data?\n\nThis action cannot be undone.`} />}
       <h2 className="text-3xl font-semibold text-center mb-6">User Profile</h2>
       

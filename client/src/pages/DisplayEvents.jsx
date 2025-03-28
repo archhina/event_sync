@@ -46,9 +46,9 @@ const DisplayEvents = ({ loggedInUser, setLoggedInUser, setMessage, setMessageSt
 
   if(events.length === 0 && invites.length === 0) {
     if (hasFinishedFetching) {
-      return <p>No events found</p>
+      return <p className="text-center">No events found</p>
     } else {
-      return <p>Loading...</p>
+      return <p className="text-center">Loading...</p>
     }
   }
 
