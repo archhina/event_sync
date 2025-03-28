@@ -14,4 +14,6 @@ public interface InviteRepository extends JpaRepository<Invite, Long> {
     Invite findByUser_UserIdAndEvent_EventId(Long userId, Long eventId);
 
     List<Invite> findByUser_UserIdAndIsAcceptedFalse(Long userId);
+
+    List<Invite> findByEvent_EventIdAndIsAcceptedTrue(Long eventId);
 }

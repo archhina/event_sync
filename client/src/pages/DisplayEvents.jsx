@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
-import EventCard from "./EventCard";
-import ConfirmModal from "./ConfirmModal";
-import { useLocation } from "react-router-dom";
+import EventCard from "../components/EventCard"
+import { useLocation } from "react-router-dom"
 
 const DisplayEvents = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
 
@@ -27,16 +26,16 @@ const DisplayEvents = ({ loggedInUser, setLoggedInUser, setMessage, setMessageSt
       })
         .then((res) => {
           if (res.status === 401 || res.status === 403) {
-            setLoggedInUser(null);
-            localStorage.clear("loggedInUser");
-            setMessage("Session expired. Please log in again.");
-            setMessageStyle("alert-error");
+            setLoggedInUser(null)
+            localStorage.clear("loggedInUser")
+            setMessage("Session expired. Please log in again.")
+            setMessageStyle("alert-error")
           }
-          return res.json();
+          return res.json()
         })
         .then((fetchedInvites) => {
-          setInvites(fetchedInvites);
-          setHasFinishedFetching(true);
+          setInvites(fetchedInvites)
+          setHasFinishedFetching(true)
         })
     }
   }
@@ -47,9 +46,9 @@ const DisplayEvents = ({ loggedInUser, setLoggedInUser, setMessage, setMessageSt
 
   if(events.length === 0 && invites.length === 0) {
     if (hasFinishedFetching) {
-      return <p>No events found</p>
+      return <p className="text-center">No events found</p>
     } else {
-      return <p>Loading...</p>
+      return <p className="text-center">Loading...</p>
     }
   }
 
@@ -66,6 +65,6 @@ const DisplayEvents = ({ loggedInUser, setLoggedInUser, setMessage, setMessageSt
   }
     </div>
   )
-};
+}
 
-export default DisplayEvents;
+export default DisplayEvents

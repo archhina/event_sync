@@ -1,7 +1,6 @@
-import { useNavigate, useParams } from "react-router-dom";
-import ConfirmModal from "./ConfirmModal";
-import { useState } from "react";
-import EventForm from "./EventForm";
+import { useNavigate, useParams } from "react-router-dom"
+import ConfirmModal from "./ConfirmModal"
+import { useState } from "react"
 
 
 const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessage, setMessageStyle, fetchData, onAccept, setShowInviteConfirm }) => {
@@ -23,11 +22,6 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
           setMessageStyle("alert-success")
           setShowConfirm(false)
           fetchData()
-        } else {
-          res.json().then(err => console.error(err))
-          setMessage("Failed to remove event")
-          setMessageStyle("alert-error")
-          setShowConfirm(false)
         }
       })
     } else {
@@ -43,11 +37,6 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
           setMessageStyle("alert-success")
           setShowConfirm(false)
           fetchData()
-        } else {
-          res.json().then(err => console.error(err))
-          setMessage("Failed to remove event")
-          setMessageStyle("alert-error")
-          setShowConfirm(false)
         }
       })
     }
@@ -56,7 +45,7 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
   return (
     <>
       {showConfirm && <ConfirmModal setOpen={setShowConfirm} message="Are you sure you want to remove this event?" onConfirm={handleDelete}/>}
-      <div className={`card lg:card-side bg-base-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] my-6 ${cardStyle && cardStyle} `} onClick={cardStyle === "disabled" ? undefined : () => navigate(`/events/${event.eventId}`)}>
+      <div className={`card lg:card-side bg-base-200 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] my-6 ${cardStyle && cardStyle} `} onClick={cardStyle === "disabled" ? undefined : () => navigate(`/events/${event.eventId}`)}>
         <figure className="w-full lg:w-1/3 h-64 overflow-hidden">
           <img
             src={event.eventImage ? event.eventImage: "https://plasticcontainercity.com/media/magefan_blog/title2.jpg"}
@@ -69,22 +58,16 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
               <div className="-mt-1">
                 {onAccept ? (
                   <div className="flex gap-4">
-                    <button
-                      className="btn btn-sm btn-outline btn-success"
-                      onClick={(evt) => {
-                        evt.stopPropagation();
-                        onAccept(invite.inviteId);
-                      }}
-                    >
+                    <button className="btn btn-sm btn-outline btn-success" onClick={(evt) => {
+                        evt.stopPropagation()
+                        onAccept(invite.inviteId)
+                      }}>
                       Accept
                     </button>
-                    <button
-                      className="btn btn-sm btn-outline btn-error"
-                      onClick={(evt) => {
-                        evt.stopPropagation();
-                        setShowInviteConfirm(true);
-                      }}
-                    >
+                    <button className="btn btn-sm btn-outline btn-error" onClick={(evt) => {
+                        evt.stopPropagation()
+                        setShowInviteConfirm(true)
+                      }}>
                       Decline
                     </button>
                   </div>
@@ -112,16 +95,13 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
           <br />
           <p className="text-sm">{event.eventDescription || "No description available."}</p>
           <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-4 border-t">
-            <div className="badge badge-primary text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📅 Date:</strong> {new Date(event.eventDate).toLocaleString()}</div>
-            <div className="badge badge-warning text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📍 Location:</strong> {event.eventLocation}</div>
+            <div className="badge badge-soft badge-primary text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📅 Date:</strong> {new Date(event.eventDate).toLocaleString()}</div>
+            <div className="badge badge-soft badge-warning text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📍 Location:</strong> {event.eventLocation}</div>
           </div>
-          {/* <div className="card-actions justify-end">
-            <button className="btn btn-primary">Buy Now</button>
-          </div> */}
         </div>
       </div>
     </>
   )
-};
+}
 
-export default EventCard;
+export default EventCard

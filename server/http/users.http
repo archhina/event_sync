@@ -52,7 +52,7 @@ POST http://localhost:8080/api/users/register
 Content-Type: application/json
 
 {
-  "email": "test4@mail.com",
+  "email": "achhina@dev-10.com",
   "password": "Password1",
   "imageUrl": "https://png.pngtree.com/recommend-works/png-clipart/20241213/ourmid/pngtree-experienced-male-master-chef-logo-illustration-png-image_14072793.png"
 }
@@ -64,7 +64,7 @@ Content-Type: application/json
 
 ### Verify User
 
-GET http://localhost:8080/api/users/verify?code=e8887c4c-e055-4e5e-b1ad-dc2bfcb9e8d6
+GET http://localhost:8080/api/users/verify?code=e7b6250d-49b2-4b48-9ea5-6f9104eb8fe1
 
 ### Login User
 POST http://localhost:8080/api/users/login
@@ -80,7 +80,7 @@ POST http://localhost:8080/api/users/login
 Content-Type: application/json
 
 {
-  "email": "test@mail.com",
+  "email": "test2@mail.com",
   "password": "Password1"
 }
 
@@ -92,5 +92,11 @@ Content-Type: application/json
 
 {
   "userId": 3,
+  "email": "test@mail.com",
   "imageUrl": "https://st.depositphotos.com/12220922/54223/i/450/depositphotos_542236176-stock-illustration-chef-characters-okay-hand-speech.jpg"
 }
+
+### delete user
+
+DELETE http://localhost:8080/api/users/5
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoidGVzdDJAbWFpbC5jb20iLCJpYXQiOjE3NDMwMDQyNTksImV4cCI6MTc0MzA5MDY1OX0.PbnUSy0PpJF11nFz6SPNS2Bsk2EIWd8xqpxzPRNqsXw

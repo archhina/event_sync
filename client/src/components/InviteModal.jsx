@@ -47,7 +47,7 @@ const InviteModal = ({ setOpen, onInvite, loggedInUser, event, setMessage, setMe
       }
     })
     setOpen(false)
-  };
+  }
 
   return (
     <div className="modal modal-open">
@@ -72,7 +72,7 @@ const InviteModal = ({ setOpen, onInvite, loggedInUser, event, setMessage, setMe
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InviteModal;
+export default InviteModal

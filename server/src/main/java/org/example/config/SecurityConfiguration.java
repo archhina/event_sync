@@ -32,7 +32,8 @@ public class SecurityConfiguration {
                             "api/item/*",
                             "api/item",
                             "api/invite/*",
-                            "api/invite"
+                            "api/invite",
+                            "api/invite/accepted/*"
 //                            "api/invite/{eventId}"
 //                            "api/invite/:eventId"
                     ).permitAll() // Public endpoints

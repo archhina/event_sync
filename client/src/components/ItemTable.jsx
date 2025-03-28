@@ -1,6 +1,6 @@
 import React from "react"
 
-const ItemTable = ({ items, itemType, handleModal, fetchItems, loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
+const ItemTable = ({ items, itemType, handleModal, fetchItems, loggedInUser, setLoggedInUser, setMessage, setMessageStyle, joined }) => {
 
   const handleDelete = (itemId) => {
     fetch("http://localhost:8080/api/item/" + itemId, {
@@ -38,7 +38,7 @@ const ItemTable = ({ items, itemType, handleModal, fetchItems, loggedInUser, set
               <th></th>
               <th>Email</th>
               <th>{itemType}</th>
-              {loggedInUser && <th><button className="btn btn-square btn-sm btn-outline btn-success text-lg" onClick={() => handleModal(itemType)}>+</button></th>}
+              {loggedInUser && joined ? <th><button className="btn btn-square btn-sm btn-outline btn-success text-lg" onClick={() => handleModal(itemType)}>+</button></th> : <th></th>}
             </tr>
           </thead>
           <tbody>
@@ -56,6 +56,6 @@ const ItemTable = ({ items, itemType, handleModal, fetchItems, loggedInUser, set
       </div>
     </div>
   )
-};
+}
 
-export default ItemTable;
+export default ItemTable

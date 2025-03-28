@@ -4,14 +4,14 @@ import Navbar from './components/Navbar'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import AccountModal from './components/AccountModal'
 import Alert from './components/Alert'
-import DisplayEvents from './components/DisplayEvents'
+import DisplayEvents from './pages/DisplayEvents'
 import Sidebar from './components/Sidebar'
-import EventForm from './components/EventForm'
-import EventPage from './components/EventPage'
+import EventForm from './pages/EventForm'
+import EventPage from './pages/EventPage'
 import InviteModal from './components/InviteModal'
-import DisplayInvitations from './components/DisplayInvitations'
-import ProfilePage from './components/ProfilePage'
-import VerificationPage from './components/VerificationPage'
+import DisplayInvitations from './pages/DisplayInvitations'
+import ProfilePage from './pages/ProfilePage'
+import VerificationPage from './pages/VerificationPage'
 
 function App() {
 
@@ -61,17 +61,14 @@ function App() {
               {/* MyEvents Page */}
               <Route path='/myevents' element={ loggedInUser === null ?
 							<Navigate to="/" /> : <DisplayEvents loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
-
               {/* Invitations Page */}
               <Route path='/invitations' element={ loggedInUser === null ?
               <Navigate to="/" /> : <DisplayInvitations loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
-
               {/* Profile Page */}
               <Route path='/profile' element={ loggedInUser === null ?
-              <Navigate to="/" /> : <ProfilePage loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
-
+              <Navigate to="/" /> : <ProfilePage loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />  
+              {/* Verification Page */}
               <Route path='/verify' element={ <VerificationPage setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} /> } />
-
               {/* Default/NotFound Page */}
               <Route path='*' element={<h1>Not Found</h1>} />
             </Routes>

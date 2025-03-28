@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"
 
 const EventForm = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
 
@@ -95,76 +95,36 @@ const EventForm = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle 
   }, [params.eventId, loggedInUser])
 
   return (
-    <div className="p-6 bg-base-100 shadow-md rounded-lg max-w-lg mx-auto">
+    <div className="p-6 bg-base-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.6)] rounded-lg max-w-lg mx-auto mt-6">
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Event Name</legend>
-          <input
-            type="text"
-            name="eventName"
-            className="input input-bordered w-full"
-            placeholder="Enter event name"
-            value={event.eventName}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="eventName" className="input input-bordered w-full" placeholder="Enter event name" value={event.eventName} onChange={handleChange} required/>
           <p className="fieldset-label">Required</p>
         </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Event Description</legend>
-          <textarea
-            name="eventDescription"
-            className="textarea textarea-bordered w-full"
-            placeholder="Enter event description (optional)"
-            value={event.eventDescription}
-            onChange={handleChange}
-          />
+          <textarea name="eventDescription" className="textarea textarea-bordered w-full" placeholder="Enter event description (optional)" value={event.eventDescription} onChange={handleChange}/>
         </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Event Image (URL)</legend>
-          <input
-            type="url"
-            name="eventImage"
-            className="input input-bordered w-full"
-            placeholder="Enter image URL (optional)"
-            value={event.eventImage}
-            onChange={handleChange}
-          />
+          <input type="url" name="eventImage" className="input input-bordered w-full" placeholder="Enter image URL (optional)" value={event.eventImage} onChange={handleChange}/>
           <p className="fieldset-label">Optional</p>
         </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Event Date & Time</legend>
-          <input
-            type="datetime-local"
-            name="eventDate"
-            className="input input-bordered w-full"
-            value={event.eventDate}
-            onChange={handleChange}
-            required
-          />
+          <input type="datetime-local" name="eventDate" className="input input-bordered w-full" value={event.eventDate} onChange={handleChange} required/>
         </fieldset>
         <fieldset className="fieldset">
           <legend className="fieldset-legend">Event Location</legend>
-          <input
-            type="text"
-            name="eventLocation"
-            className="input input-bordered w-full"
-            placeholder="Enter event location"
-            value={event.eventLocation}
-            onChange={handleChange}
-          />
+          <input type="text" name="eventLocation" className="input input-bordered w-full" placeholder="Enter event location" value={event.eventLocation} onChange={handleChange}/>
           <p className="fieldset-label">Optional</p>
         </fieldset>
         <fieldset className="fieldset">
         <legend className="fieldset-legend">Event Privacy:</legend>
-          <label className="flex items-center" />          <input
-              type="checkbox"
-              name="isPrivate"
-              className="toggle"
-              checked={event.isPrivate}
-              onChange={handleChange}
-            />
+          <label className="flex items-center" />
+            <input type="checkbox" name="isPrivate" className="toggle" checked={event.isPrivate} onChange={handleChange}/>
         </fieldset>
         <button type="submit" className="btn btn-primary w-full">
           {params.eventId ? "Update Event": "Create Event"}
@@ -172,6 +132,6 @@ const EventForm = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle 
       </form>
     </div>
   )
-};
+}
 
-export default EventForm;
+export default EventForm

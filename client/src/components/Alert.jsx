@@ -16,6 +16,6 @@ const Alert = ({ message, setMessage, messageStyle, setMessageStyle }) => {
       }} className="btn btn-sm btn-square btn-outline btn-error ml-2 text-lg font-bold text-red-500">✕</button>
     </div>
   )
-};
+}
 
-export default Alert;
+export default Alert
