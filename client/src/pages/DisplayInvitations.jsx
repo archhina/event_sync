@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import EventCard from "./EventCard"
-import ConfirmModal from "./ConfirmModal"
+import EventCard from "../components/EventCard"
+import ConfirmModal from "../components/ConfirmModal"
 
 const DisplayInvitations = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
 

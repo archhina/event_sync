@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import EventCard from "./EventCard"
-import ItemModal from "./ItemModal"
-import ItemTable from "./ItemTable"
+import EventCard from "../components/EventCard"
+import ItemModal from "../components/ItemModal"
+import ItemTable from "../components/ItemTable"
 
 const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle, event, setEvent }) => {
 
@@ -46,6 +46,9 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
           setMains(newMains)
           setSides(newSides)
           setOthers(newOthers)
+          if (!loggedInUser) {
+            setHasFinishedFetching(true)
+          }
         })
       } else {
         res.json().then(err => console.error(err))
@@ -74,9 +77,12 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
         },
       })
         .then(res => {
-          res.json().then(data => {
+          res.text().then(data => {
             if (data !== "Invite not found") {
               setJoined(true)
+              setHasFinishedFetching(true)
+            } else {
+              setJoined(false)
               setHasFinishedFetching(true)
             }
           })
@@ -140,11 +146,11 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
       </div>
       
       <div className="flex flex-col lg:flex-row gap-4 mt-6 mx-11">
-        <ItemTable items={mains} itemType={"Main Dish"} handleModal={handleModal} fetchItems={fetchItems} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} />
+        <ItemTable items={mains} itemType={"Main Dish"} handleModal={handleModal} fetchItems={fetchItems} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} joined={joined} />
         <div className="divider lg:divider-horizontal"></div>
-        <ItemTable items={sides} itemType={"Side/Appetizer"} handleModal={handleModal} fetchItems={fetchItems} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} />
+        <ItemTable items={sides} itemType={"Side/Appetizer"} handleModal={handleModal} fetchItems={fetchItems} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} joined={joined}/>
         <div className="divider lg:divider-horizontal"></div>
-        <ItemTable items={others} itemType={"Other"} handleModal={handleModal} fetchItems={fetchItems} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} />
+        <ItemTable items={others} itemType={"Other"} handleModal={handleModal} fetchItems={fetchItems} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} setMessage={setMessage} setMessageStyle={setMessageStyle} joined={joined}/>
       </div>
     </div>
   )

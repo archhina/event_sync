@@ -149,7 +149,7 @@ public class InviteController {
     public ResponseEntity<Object> getUserInvite(@PathVariable Long eventId, @RequestHeader("Authorization") String jwt) {
         Long userId = secretSigningKey.getUserId(jwt);
         if (userId == null) {
-            return new ResponseEntity<>(List.of("Unauthorized"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
         }
         Result<Event> eventExists = eventService.getEventById(eventId);
         if (!eventExists.isSuccess()) {
@@ -157,8 +157,8 @@ public class InviteController {
         }
         Invite invite = service.findUserIdAndEventId(userId, eventExists.getPayload().getEventId());
         if (invite == null) {
-            return new ResponseEntity<>(List.of("Invite not found"), HttpStatus.OK);
+            return new ResponseEntity<>("Invite not found", HttpStatus.OK);
         }
-        return new ResponseEntity<>(invite, HttpStatus.OK);
+        return new ResponseEntity<>("Found invite", HttpStatus.OK);
     }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import EventCard from "./EventCard"
+import EventCard from "../components/EventCard"
 import { useLocation } from "react-router-dom"
 
 const DisplayEvents = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {

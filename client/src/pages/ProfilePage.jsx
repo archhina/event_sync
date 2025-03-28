@@ -1,5 +1,5 @@
 import { useState } from "react"
-import ConfirmModal from "./ConfirmModal"
+import ConfirmModal from "../components/ConfirmModal"
 import { useNavigate } from "react-router-dom"
 
 const ProfilePage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle }) => {
@@ -22,6 +22,7 @@ const ProfilePage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyl
     })
     .then(res => {
       if (res.ok) {
+        setLoggedInUser(updatedUser)
         setMessage("Profile picture updated successfully")
         setMessageStyle("alert-success")
         navigate("/")

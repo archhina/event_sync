@@ -1,13 +1,13 @@
 ### Create Event
 POST http://localhost:8080/api/events/create
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0Mjg0NTE4MywiZXhwIjoxNzQyOTMxNTgzfQ.LnFdNa3XGH7fz-CJVUoinSFYS7Noofa8Yt9utaym2hs
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImltYWdlVXJsIjoiaHR0cHM6Ly9pbWcuaWNvbnM4LmNvbS9pb3MtZ2x5cGhzLzYwL3VzZXItLXYxLnBuZyIsImlhdCI6MTc0MzAxNjM5OCwiZXhwIjoxNzQzMTAyNzk4fQ.jyr5GG8RiDUKPy0byU6lq6n66_IuMI74JLWasKD-Q24
 Content-Type: application/json
 
 {
-  "eventName": "Event private 2",
+  "eventName": "Event public",
   "eventDate": "2025-04-01T18:00:00",
   "eventLocation": "Dev10 Central",
-  "isPrivate": true,
+  "isPrivate": false,
   "host": {
     "userId": 1
   }
@@ -38,4 +38,4 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0
 GET http://localhost:8080/api/events/public
 
 ### Get events by id
-GET http://localhost:8080/api/events/2
+GET http://localhost:8080/api/events/4

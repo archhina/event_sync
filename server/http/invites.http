@@ -4,17 +4,21 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWNoaGluYUBkZXYt
 
 ### Invite user to private event
 POST http://localhost:8080/api/invite
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0Mjc3MjIwNCwiZXhwIjoxNzQyODU4NjA0fQ.ae2a9Lo4cckvvBSQXECOism4Oq9QiYbI2L7sz7eiyYE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0MjkzMjAwOCwiZXhwIjoxNzQzMDE4NDA4fQ.XokRWMh-T0hDPtwrwMMoXPhMxAaUBo4TD00yDzz5lCI
 Content-Type: application/json
 
 {
   "event": {
-    "eventId": 2
+    "eventId": 4
   },
   "user": {
     "email": "achhina@dev-10.com"
   }
 }
+
+### Get Invites that are not accepted
+GET http://localhost:8080/api/invite
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWNoaGluYUBkZXYtMTAuY29tIiwiaWF0IjoxNzQyOTI4NzgzLCJleHAiOjE3NDMwMTUxODN9.y0V4f_jQK8qGRZXTRceQBpMuemnRJrQ6jeS6a2E3zHs
 
 ### Accept invite
 PUT http://localhost:8080/api/invite/3
@@ -26,4 +30,8 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWNoaGluYUBkZXYt
 
 ### Get my events
 GET http://localhost:8080/api/invite/accepted
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoiYWNoaGluYUBkZXYtMTAuY29tIiwiaWF0IjoxNzQyODQyNTg3LCJleHAiOjE3NDI5Mjg5ODd9.FAjJc9ZubZKzRCL02m8_TiTBmUTGWHo8fVGNWrKPeCw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiY2hoaW5hYXJtZWV0QGdtYWlsLmNvbSIsImlhdCI6MTc0Mjg3NzU5MywiZXhwIjoxNzQyOTYzOTkzfQ.k0kUdslu-gIPfXhTUlcXf7t5W9FovP1jo3xn8wPpFDE
+
+### Get user invite
+GET http://localhost:8080/api/invite/2
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjMsImVtYWlsIjoiYWNoaGluYUBkZXYtMTAuY29tIiwiaW1hZ2VVcmwiOiJodHRwczovL3BuZy5wbmd0cmVlLmNvbS9yZWNvbW1lbmQtd29ya3MvcG5nLWNsaXBhcnQvMjAyNDEyMTMvb3VybWlkL3BuZ3RyZWUtZXhwZXJpZW5jZWQtbWFsZS1tYXN0ZXItY2hlZi1sb2dvLWlsbHVzdHJhdGlvbi1wbmctaW1hZ2VfMTQwNzI3OTMucG5nIiwiaWF0IjoxNzQzMDIxNTYyLCJleHAiOjE3NDMxMDc5NjJ9.pNRnkpYyZYHSGabTSObKAgePeTi9Rv17jl1fUMq3uwI

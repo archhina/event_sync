@@ -1,6 +1,4 @@
-import { useState } from "react"
 import { Link, NavLink, useLocation, useParams } from "react-router-dom"
-import AccountModal from "./AccountModal"
 
 const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setNavMessage, event, setOpenInvite }) => {
 
@@ -17,7 +15,7 @@ const Navbar = ({ navMessage, open, setOpen, loggedInUser, setLoggedInUser, setN
         </div>
         <div className="navbar-end">
         {(location.pathname === "/" || location.pathname === '/myevents') && loggedInUser && <Link to={'/create'} onClick={() => setNavMessage("Creating New Event")} className="btn btn-success btn-outline px-16 mr-4 ">Create Event</Link>}
-        {event && event.host && isEventPage && loggedInUser && loggedInUser.email === event.host.email && <button onClick={() => {
+        {event && event.host && isEventPage && loggedInUser && event.private && loggedInUser.email === event.host.email && <button onClick={() => {
           setNavMessage("Inviting Users")
           setOpenInvite(true)
           }} className="btn btn-success btn-outline px-16 mr-4 ">Invite Users</button>}
