@@ -95,8 +95,8 @@ const EventCard = ({ inviteId, invite, event, cardStyle, loggedInUser, setMessag
           <br />
           <p className="text-sm">{event.eventDescription || "No description available."}</p>
           <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-4 border-t">
-            <div className="badge badge-primary text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📅 Date:</strong> {new Date(event.eventDate).toLocaleString()}</div>
-            <div className="badge badge-warning text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📍 Location:</strong> {event.eventLocation}</div>
+            <div className="badge badge-soft badge-primary text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📅 Date:</strong> {new Date(event.eventDate).toLocaleString()}</div>
+            <div className="badge badge-soft badge-warning text-sm md:text-base font-medium whitespace-normal h-8 mt-3"><strong>📍 Location:</strong> {event.eventLocation}</div>
           </div>
         </div>
       </div>

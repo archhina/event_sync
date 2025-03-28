@@ -161,4 +161,17 @@ public class InviteController {
         }
         return new ResponseEntity<>("Found invite", HttpStatus.OK);
     }
+
+    @GetMapping("/accepted/{eventId}")
+    public ResponseEntity<Object> getAcceptedInvitesByEventId(@PathVariable Long eventId) {
+        Result<Event> eventExists = eventService.getEventById(eventId);
+        if (!eventExists.isSuccess()) {
+            return new ResponseEntity<>(eventExists.getErrorMessages(), eventExists.getHttpStatus());
+        }
+        List<Invite> invites = service.getAcceptedInvitesByEventId(eventId);
+        if (invites.isEmpty()) {
+            return new ResponseEntity<>(List.of("No accepted invites found for this event"), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(invites.size(), HttpStatus.OK);
+    }
 }

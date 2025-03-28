@@ -16,6 +16,8 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
 
   const [joined, setJoined] = useState(false)
 
+  const [registered, setRegistered] = useState(0)
+
   const params = useParams()
 
   const [hasFinishedFetching, setHasFinishedFetching] = useState(false)
@@ -23,6 +25,15 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
   const handleModal = (type) => {
     setItemType(type)
     {event.eventId && setOpen(true)}
+  }
+
+  const fetchRegistered = () => {
+    fetch("http://localhost:8080/api/invite/accepted/" + params.eventId)
+    .then(res => {
+      if (res.ok) {
+        res.text().then(amountRegistered => setRegistered(amountRegistered))
+      } 
+    })
   }
 
   const fetchItems = () => {
@@ -46,6 +57,7 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
           setMains(newMains)
           setSides(newSides)
           setOthers(newOthers)
+          fetchRegistered()
           if (!loggedInUser) {
             setHasFinishedFetching(true)
           }
@@ -130,13 +142,15 @@ const EventPage = ({ loggedInUser, setLoggedInUser, setMessage, setMessageStyle,
               <img
                 src={event && event.host && event.host.imageUrl}
                 alt="Host Profile"
-                className="w-24 h-24 rounded-full border-2 border-primary object-cover"
+                className="w-20 h-20 rounded-full border-2 border-primary object-cover"
               />
             </div>
-            <h2 className="card-title mx-auto w-fit border-b">
-              Host Contact Email:<br />
+            <h2 className="card-title text-base mx-auto w-fit">
+              Host Contact Email:
+              <br />
               {event && event.host && event.host.email}
             </h2>
+            <div className="badge badge-soft badge-secondary text-sm md:text-base font-medium whitespace-normal h-8 -mb-3 mx-auto"><strong>Registered: </strong> {registered}</div>
             <div className="card-actions justify-center">
               <button className="btn btn-success btn-wide mt-4" disabled={joined || !loggedInUser} onClick={handleJoin}>{joined ? "Already Joined!": loggedInUser ? "Join Event!": "Login to Join!"}
               </button>

@@ -63,6 +63,10 @@ public class InviteService {
         return inviteRepository.findByUser_UserIdAndIsAcceptedTrue(userId);
     }
 
+    public List<Invite> getAcceptedInvitesByEventId(Long eventId) {
+        return inviteRepository.findByEvent_EventIdAndIsAcceptedTrue(eventId);
+    }
+
     public List<Invite> getInvitesByUserIdAndNotAccepted(Long userId) {
         return inviteRepository.findByUser_UserIdAndIsAcceptedFalse(userId);
     }
